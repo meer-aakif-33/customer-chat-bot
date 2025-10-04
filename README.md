@@ -1,66 +1,112 @@
+---
 
-# Generatve AI Q&A: Question and Answer System Based on Google Palm LLM and Langchain for E-learning company  
+# 🤖 Customer Service Chatbot (Gemini + FAISS)
 
-This is an end to end LLM project based on Google Palm and Langchain. We are building a Q&A system for an e-learning company called Nullclass.Nullclass sells data related courses and virtual internships. They have thousands of learners who uses discord server or email to ask questions. This system will provide a streamlit based user interface for students where they can ask questions and get answers. 
+An interactive AI-powered **Customer Service Chatbot** built with **Streamlit, LangChain, and Google Gemini API**. It enables intelligent question answering from structured datasets using **semantic search** with **FAISS** and **HuggingFace embeddings**, and provides a responsive web interface for real-time conversations.
 
+---
 
-## Project Highlights
+## 🛠 Features
 
-- Use a real CSV file of FAQs that Nullclass company is using right now. 
-- Their human staff will use this file to assist their course learners.
-- We will build an LLM based question and answer system that can reduce the workload of their human staff.
-- Students should be able to use this system to ask questions directly and get answers within seconds
+* **AI-Powered Chat:** Uses Google Gemini LLM via LangChain for context-aware responses.
+* **Semantic Knowledge Retrieval:** Implements FAISS vector database with HuggingFace embeddings to search CSV datasets.
+* **Real-Time Streamlit UI:** Clean, responsive interface with user/bot chat bubbles, timestamps, and chat history.
+* **Knowledge Base Management:** Automatically creates a FAISS knowledge base if missing.
+* **Modular Design:** Code separated into `config`, `vector_db`, `qa_chain`, and `app` for maintainability and scalability.
 
+---
 
-
-## Installation
-
-1.Clone this repository to your local machine using:
-
-```bash
-  git clone https://github.com/aslin72/customer_service_chatbot_LLM.git
-```
-2.Navigate to the project directory:
-
-```bash
-  cd customer_service_chatbot_LLM
-```
-3. Install the required dependencies using pip:
-
-```bash
-  pip install -r requirements.txt
-```
-4.Acquire an api key through makersuite.google.com and put it in .env file
-
-```bash
-  GOOGLE_API_KEY="your_api_key_here"
-```
-## Usage
-
-1. Run the Streamlit app by executing:
-```bash
-streamlit run main.py
+## 📂 Project Structure
 
 ```
+customer_service_chatbot_LLM/
+├─ dataset/
+│  └─ dataset.csv          # CSV with prompts and responses
+├─ src/
+│  ├─ app.py               # Streamlit frontend UI
+│  ├─ config.py            # API keys, model config, embeddings
+│  ├─ vector_db.py         # Load/Create FAISS knowledge base
+│  └─ qa_chain.py          # Prompt template & RetrievalQA chain
+├─ .env                    # Gemini API key and model configuration
+└─ README.md
+```
 
-2.The web app will open in your browser.
+---
 
-- To create a knowledebase of FAQs, click on Create Knolwedge Base button. It will take some time before knowledgebase is created so please wait.
+## ⚡ Technologies Used
 
-- Once knowledge base is created you will see a directory called faiss_index in your current folder
+* **Streamlit** – Interactive web interface
+* **LangChain** – LLM orchestration and QA chain
+* **Google Gemini API** – Large Language Model for intelligent responses
+* **FAISS** – Vector database for semantic search
+* **HuggingFace Instruct Embeddings** – Embedding generation for knowledge retrieval
+* **Python** – Backend scripting
 
-- Now you are ready to ask questions. Type your question in Question box and hit Enter
+---
 
-## Sample Questions
-  - Do you guys provide internship and also do you offer EMI payments?
-  - Do you have javascript course?
-  - Should I learn power bi or tableau?
-  - I've a MAC computer. Can I use powerbi on it?
-  - I don't see power pivot. how can I enable it?
+## 🚀 Getting Started
 
-## Project Structure
+### 1. Clone the repository
 
-- main.py: The main Streamlit application script.
-- langchain_helper.py: This has all the langchain code
-- requirements.txt: A list of required Python packages for the project.
-- .env: Configuration file for storing your Google API key.
+```bash
+git clone https://github.com/<your-username>/customer_service_chatbot_LLM.git
+cd customer_service_chatbot_LLM/src
+```
+
+### 2. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+**Dependencies include:**
+`streamlit`, `langchain`, `langchain-community`, `google-generativeai`, `huggingface-hub`, `faiss-cpu`, `python-dotenv`
+
+### 3. Set up environment variables
+
+Create a `.env` file in `src/`:
+
+```env
+GEMINI_API_KEY=your_google_gemini_api_key
+GEMINI_MODEL=gemini-2.0-flash-lite
+```
+
+### 4. Add your dataset
+
+Ensure your `dataset/dataset.csv` has the following format:
+
+```csv
+prompt,response
+I have never done programming in my life. Can I take this course?,"Yes, this is the perfect training for anyone..."
+```
+
+### 5. Run the app
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## 💡 Usage
+
+1. Open the Streamlit app in your browser.
+2. Type a question in the input box.
+3. The chatbot will respond using your knowledge base.
+4. The retrieved documents are viewable under **“Retrieved Context Documents”** if enabled.
+
+---
+
+## 🔧 Future Improvements
+
+* Add **avatars** and auto-scroll for a ChatGPT-like experience.
+* Add **multi-file knowledge base support**.
+* Improve **retry logic** and caching for large datasets.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
+
+---
